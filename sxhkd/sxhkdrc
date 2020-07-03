@@ -1,0 +1,77 @@
+##############################
+#     Adjust Nodes (ctrl)    #
+##############################
+# preselect direction
+shift + {Up,Down,Left,Right}
+	bspc node -p {north,south,west,east}
+# preselect window ratio
+ctrl + {1-9}
+	bspc node -o 0.{1-9}
+# cancel preselection
+ctrl + space
+	bspc node -p cancel
+# swap current node with biggest node
+ctrl + l
+	bspc node -s biggest
+# refresh sxhkd keys
+ctrl + Escape 	
+	pkill -USR1 -x sxhkd
+# restart bspwm
+ctrl + super + r
+	bspc wm -r
+
+##############################
+#    Applications (super)    #
+##############################
+# open sxhkd keys config file
+super + k
+	less $HOME/.config/sxhkd/sxhkdrc
+# terminal
+super + space
+	kitty
+# firefox
+super + f
+	firefox-developer-edition
+##############################
+#    Close and Hide (alt)    #
+##############################
+# close active window
+alt + x
+	bspc node $d -c
+# hide window
+alt + h
+	bspc node -g hidden
+# unhide window
+alt + u
+	bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
+##############################
+#      Window State (fn)     #
+##############################
+# set window state
+F10
+	bspc node -t tiled
+F11
+	bspc node -t floating
+F12
+	bspc node -t fullscreen
+##############################
+#    Window Sizes (arrows)   #
+##############################
+# move floating window
+ctrl + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+# decrease floating window size
+alt + {Right,Up,Left,Down}
+	bspc node -z {left 20 0, bottom 0 -20, right -20 0, top 0 20}
+# increase floating window size
+super + {Left,Down,Right,Up}
+	bspc node -z {left -20 0, bottom 0 20, right 20 0, top 0 -20}
+# focus node in given direction
+super + alt + {Left,Down,Right,Up}
+	bspc node -f {west,south,east,north}
+
+# brightness
+XF86MonBrightnessDown
+	xbacklight -dec 10
+XF86MonBrightnessUp
+	xbacklight -inc 10
